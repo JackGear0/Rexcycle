@@ -20,17 +20,22 @@ struct LoginView: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Color.background // Aqui você define a cor de fundo
-                        .edgesIgnoringSafeArea(.all) // Faz com que a cor preencha toda a tela
+                    Color.background
+                        .edgesIgnoringSafeArea(.all)
                     VStack {
-                        Text("Rexcycle")
-                            .fontWeight(.bold)
-                            .font(.system(size: 34))
-                            .padding()
-                            .foregroundColor(Color.blue)
+                        ZStack{
+                            Image(systemName: "circle")
+                                .resizable()
+                                .frame(width: 220, height: 220)
+                            Text("Rexcycle")
+                                .fontWeight(.bold)
+                                .font(.system(size: 34))
+                                .padding()
+                                .foregroundColor(Color.blue)
+                        }
                         Text("Log In")
                             .fontWeight(.bold)
-                            .font(.system(size: 34))
+                            .font(.system(size: 24))
                             .padding()
                             .foregroundColor(Color.blue)
                         VStack(alignment: .center) {
@@ -69,7 +74,6 @@ struct LoginView: View {
                                         get: { password ?? "" },
                                         set: { password = $0 }
                                     ))
-                                    .padding(15)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10)
                                             .stroke(Color.gray, lineWidth: 2)
