@@ -102,11 +102,21 @@ struct LoginView: View {
                             }
                             .frame(width: 300)
                             Spacer().frame(height: 30)
-//                            NavigationLink(destination: HomeView()) {
-//                                OnBoardingButton(label: "Começar", action: {
-//                                    doLogin()
-//                                })
-//                            }
+                            NavigationLink(destination: HomeView()) {
+                                HStack{
+                                    Text("ENTRAR")
+                                        .font(.system(size: 20))
+                                        .foregroundColor(.white)
+                                    Image(systemName: "door.right.hand.open")
+                                        .font(.system(size: 26))
+                                        .foregroundColor(.white)
+                                }
+                                .frame(minWidth: 330)
+                                .bold()
+                                .padding()
+                                .background(.darkGreen)
+                                .cornerRadius(50)
+                            }
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -137,13 +147,6 @@ struct LoginView: View {
 //    }
 }
 
-struct HomeView: View {
-    var body: some View {
-        Text("Welcome to Home View")
-            .font(.largeTitle)
-            .padding()
-    }
-}
 #Preview {
     LoginView()
 }
