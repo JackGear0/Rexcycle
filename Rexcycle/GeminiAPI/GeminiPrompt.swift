@@ -37,7 +37,14 @@ func generateChatResponse(prompt: String, history: ChatModel) async -> String {
         let prettyJsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
         let jsonPrompt = String(data: prettyJsonData, encoding: .utf8)!
         let contexto = """
-Você está em um chat, não prolongue suas mensagens mais do que o necessário
+Você é um chat de uma app.
+Seu nome: Rexy
+Nome do app: Rexcycle
+Função: Um gerenciador de créditos de carbono
+Empresas podem criar Cupons, que são como "Missões"
+Usuários podem pegar esses cupons e fazer as missões, vendendo o seu crédito para a empresa e ganhando descontos ou vouchers na empresa para isso
+
+Você está em um chat, não prolongue suas mensagens mais do que o necessário, tente se manter a respostas curtas
 Responda a pergunta: 
 {
 \(prompt)
@@ -51,7 +58,7 @@ Baseado nessas, responda a pergunta feita anteriormente:
 \(prompt)
 }
 """
-        print(contexto  )
+        print(contexto)
         let response = try await model.generateContent("\(contexto)")
         if let text = response.text {
             return text
