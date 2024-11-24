@@ -11,6 +11,20 @@ struct AddMaterial: View {
     @StateObject private var viewModel = MaterialViewModel()
     @State private var selectedUnit: String = "kg"
     
+    @State private var auxMaterial: String = ""
+    @State private var auxObject: String = ""
+    
+    private let materialList = [ //This is the List of values we'll use
+        "Garrafa um",
+        "Garrafa dois",
+        "Garrafa tres"
+    ]
+    
+    private let objectList = [ //This is the List of values we'll use
+        "Vidro 1",
+        "Vidro 2",
+        "Vidro 3"
+    ]
     var body: some View {
         VStack{
             Text("1.Escolha a categoria")
@@ -53,6 +67,7 @@ struct AddMaterial: View {
                 .padding()
                 .foregroundColor(.darkGreen)
             
+            
             HStack {
                 Text("Quantidade (kg):")
                     .font(.headline)
@@ -65,6 +80,44 @@ struct AddMaterial: View {
                 .pickerStyle(MenuPickerStyle())
                 .tint(.darkGreen)
                 .frame(width: 100)
+                HStack{
+                    Image(systemName: "dollarsign.circle.fill")
+                        .foregroundColor(.lightBrown)
+                    Text("+130 cred.")
+                        .font(.body)
+                        .foregroundColor(.lightBrown)
+                }
+                .padding(.horizontal)
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                        .foregroundColor(.white)
+                    Text("Adicionar Item")
+                        .foregroundColor(.white)
+                }
+                .padding(.leading)
+                .padding()
+                .bold()
+                .foregroundStyle(.red)
+                .background {
+                    RoundedRectangle(cornerRadius: 25.0)
+                        .foregroundStyle(.darkGreen)
+                        .padding(.vertical, 5)
+                }
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 25.0)
+                    .stroke(.lightBrown, lineWidth: 2)
+                    .padding(.vertical, 5)
+            }
+            HStack(spacing: 20) {
+                ForEach(0..<10) { _ in
+                    Image(systemName: "circle.fill")
+                        .resizable()
+                        .frame(width: 21.26, height: 21.26)
+                        .foregroundColor(.babyGreen)
+                        .padding(.vertical)
+                        
+                }
             }
             .padding()
         }
