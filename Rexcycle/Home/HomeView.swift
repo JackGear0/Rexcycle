@@ -25,6 +25,21 @@ struct HomeView: View {
                 Image(.card)
                 //                    .resizable()
                 //                    .frame(width: 220, height: 220)
+                NavigationLink(destination: AddMaterial()) {
+                    HStack{
+                        Image(systemName: "plus.circle.fill")
+                            .font(.system(size: 26))
+                            .foregroundColor(.white)
+                        Text("Cadastrar Coleta")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                    }
+                    .frame(minWidth: 330)
+                    .bold()
+                    .padding()
+                    .background(.darkGreen)
+                    .cornerRadius(50)
+                }
                 HStack{
                     Text("Para você")
                         .font(.system(size: 34))
@@ -54,34 +69,19 @@ struct HomeView: View {
                 }
                 .frame(width: 350)
                 .scrollClipDisabled()
-                HStack{
-                    Text("Reciclagem")
-                        .font(.system(size: 34))
-                        .padding()
-                        .foregroundColor(.darkGreen)
-                    Spacer()
-                }
-                Button(action: {}) {
-                    HStack{
-                        Image(systemName: "plus.circle.fill")
-                            .font(.system(size: 26))
-                            .foregroundColor(.white)
-                        Text("Cadastrar Coleta")
-                            .font(.system(size: 20))
-                            .foregroundColor(.white)
-                    }
-                }
-                .frame(minWidth: 330)
-                .bold()
-                .padding()
-                .background(.darkGreen)
-                .cornerRadius(50)
-                Text("Cadastre coletas e acumule créditos para resgatar cupons ")
-                    .font(.system(size: 15))
-                    .foregroundColor(.darkGreen)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: 257)
+//                HStack{
+//                    Text("Reciclagem")
+//                        .font(.system(size: 34))
+//                        .padding()
+//                        .foregroundColor(.darkGreen)
+//                    Spacer()
+//                }
+//                Text("Cadastre coletas e acumule créditos para resgatar cupons ")
+//                    .font(.system(size: 15))
+//                    .foregroundColor(.darkGreen)
+//                    .multilineTextAlignment(.center)
+//                    .fixedSize(horizontal: false, vertical: true)
+//                    .frame(maxWidth: 257)
                 HStack {
                     Text("Locais de Coleta")
                         .font(.system(size: 25))
