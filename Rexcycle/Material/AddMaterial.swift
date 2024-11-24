@@ -8,23 +8,10 @@
 import SwiftUI
 
 struct AddMaterial: View {
-    @State private var auxMaterial: String = ""
-    @State private var auxObject: String = ""
+    @StateObject private var viewModel = MaterialViewModel()
+    @State private var selectedUnit: String = "kg"
     
-    private let materialList = [ //This is the List of values we'll use
-        "um",
-        "dois",
-        "tres"
-    ]
-    
-    private let objectList = [ //This is the List of values we'll use
-        "1",
-        "2",
-        "3"
-    ]
     var body: some View {
-        
-        
         VStack{
             Text("1.Escolha a categoria")
                 .bold()
@@ -32,19 +19,27 @@ struct AddMaterial: View {
                 .padding()
                 .foregroundColor(.darkGreen)
             List {
-                Picker("Material",
-                       selection: $auxMaterial) {
-                    ForEach(materialList,
-                            id: \.self) {
-                        Text($0)
+                Picker("Objeto", selection: $viewModel.selectedObject) {
+                    Text("Garrafa").tag("Garrafa")
+                    Text("Embalagem").tag("Embalagem")
+                    Text("Sacola").tag("Sacola")
+                    Text("Latinha").tag("Latinha")
+                    Text("Papel").tag("Papel")
+                }
+                .pickerStyle(MenuPickerStyle())
+                .listRowSeparator(.hidden)
+                .tint(.darkGreen)
+                
+                Picker("Material", selection: $viewModel.selectedMaterial) {
+                    ForEach(materialOptions(for: viewModel.selectedObject), id: \.self) { material in
+                        Text(material).tag(material)
                     }
                 }
-                       .listRowSeparator(.hidden)
-                Picker("Objeto",
-                       selection: $auxObject) {
-                    ForEach(objectList,
-                            id: \.self) {
-                        Text($0)
+                .pickerStyle(MenuPickerStyle())
+                .tint(.darkGreen)
+                .onAppear {
+                    if let firstMaterial = materialOptions(for: viewModel.selectedObject).first {
+                        viewModel.selectedMaterial = firstMaterial
                     }
                 }
             }
@@ -57,8 +52,40 @@ struct AddMaterial: View {
                 .font(.system(size: 25))
                 .padding()
                 .foregroundColor(.darkGreen)
+            
+            HStack {
+                Text("Quantidade (kg):")
+                    .font(.headline)
+                
+                Picker("Quantidade", selection: $viewModel.selectedQuantity) {
+                    ForEach(0..<101, id: \.self) { value in
+                        Text("\(Double(value), specifier: "%.0f")").tag(Double(value))
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                .tint(.darkGreen)
+                .frame(width: 100)
+            }
+            .padding()
         }
         .navigationTitle("Cadastrar Coleta")
+    }
+    
+    func materialOptions(for object: String) -> [String] {
+        switch object {
+        case "Garrafa":
+            return ["Vidro", "Plástico", "Metal"]
+        case "Embalagem":
+            return ["Papelão", "Plástico"]
+        case "Sacola":
+            return ["Plástico"]
+        case "Latinha":
+            return ["Metal"]
+        case "Papel":
+            return ["Papel"]
+        default:
+            return []
+        }
     }
 }
 
