@@ -12,6 +12,7 @@ struct RedeemVoucherView: View {
     @Environment(\.dismiss) var dismiss
     @State var isPurchased = false
     @State var voucher: Voucher
+    @Binding var userAuth: User
     
     var body: some View {
         VStack {
@@ -31,6 +32,7 @@ struct RedeemVoucherView: View {
                                 do {
                                     let user = try await API.me()
                                     try await API.updateCredits(credits: user.credit - voucher.purchased_credit)
+                                    userAuth.credit = user.credit - voucher.purchased_credit
                                     print("Créditos atualizados com sucesso!")
                                 } catch {
                                     print("Erro ao atualizar créditos: \(error)")
