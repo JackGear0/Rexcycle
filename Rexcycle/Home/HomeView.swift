@@ -12,7 +12,8 @@ struct HomeView: View {
     @State var userAuth: User
     @State var isLoading: Bool = true
     @State var vouchers: [Voucher] = []
-    var empresa = ["Amazon", "Guaraná", "Coca-cola", "Uber", "Dell"]
+    var empresaImage = ["amazon", "99", "mercado", "uber", "dell"]
+    var empresa = ["Amazon", "99", "Mercado L.", "Uber", "Dell"]
     @State private var showingSheet = false
     
     var body: some View {
@@ -99,10 +100,10 @@ struct HomeView: View {
                     HStack {
                         ForEach(0..<5) { i in
                             VStack {
-                                Image(systemName: "circle.fill")
+                                Image(empresaImage[i])
                                     .resizable()
                                     .frame(width: 63, height: 63)
-                                    .foregroundColor(.lightWhite)
+                                    .cornerRadius(100)
                                 Text(empresa[i])
                                     .foregroundStyle(.darkGreen)
                             }
