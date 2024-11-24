@@ -23,8 +23,17 @@ struct ChatListView: View {
     ]
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
+                HStack(spacing: 116){
+                    Text("Chat List")
+                        .fontWeight(.bold)
+                        .font(.system(size: 34))
+                        .padding()
+                        .foregroundColor(.black)
+                        .frame(alignment: .leading)
+                    Spacer()
+                }
                 List(chats) { chat in
                     HStack {
                         Image(systemName: "message.fill")
