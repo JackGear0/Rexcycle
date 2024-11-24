@@ -54,7 +54,6 @@ struct HomeView: View {
                                         }
                                     }
                                 }
-                                //                                .frame(width: 193, height: 80)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .background(.brown)
                                 .cornerRadius(20)
@@ -186,7 +185,6 @@ struct HomeView: View {
                                         }
                                     }
                                 }
-                                //                                .frame(width: 193, height: 80)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .background(.brown)
                                 .cornerRadius(20)
@@ -214,6 +212,8 @@ struct HomeView: View {
                                 .padding(.bottom)
                             }
                         }
+                        .padding(.vertical, 0)
+                        .padding(.horizontal, 16)
                     }
                     .frame(width: 353, height: 213)
                     .background(.white)
@@ -281,5 +281,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(userAuth: User(username: "p", name: "pedro", credit: 21, is_enterprise: false))
+    HomeView(userAuth: User(username: "p", name: "pedro", credit: 21, is_enterprise: true))
 }
