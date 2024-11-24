@@ -11,6 +11,7 @@ import SwiftUI
 struct RexcycleApp: App {
     
     @State var isLoggedIn: Bool = false
+    @State var isEnterprise: Bool = false
     
     init() {
         UITabBar.appearance().backgroundColor = UIColor.white
@@ -26,6 +27,7 @@ struct RexcycleApp: App {
                             Task {
                                 do {
                                     try await API.login(username: "Pedro", password: "123456")
+                                    isEnterprise = false
                                     isLoggedIn = true
                                     print("Login realizado com sucesso!")
                                 } catch {
@@ -45,6 +47,7 @@ struct RexcycleApp: App {
                             Task {
                                 do {
                                     try await API.login(username: "Apple", password: "123456")
+                                    isEnterprise = true
                                     isLoggedIn = true
                                     print("Login realizado com sucesso!")
                                 } catch {
@@ -62,7 +65,7 @@ struct RexcycleApp: App {
                     }
                 } else {
                     TabView {
-                        HomeView()
+                        HomeView(isEnterprise: isEnterprise)
                             .tabItem {
                                 Image(systemName: "leaf.fill")
                                 Text("Home")

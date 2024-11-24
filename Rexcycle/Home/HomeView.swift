@@ -9,14 +9,14 @@ import SwiftUI
 
 struct HomeView: View {
     
-    var enterprise: Bool = false
+    @State var isEnterprise: Bool
     var empresa = ["Amazon", "Guaraná", "Coca-cola", "Uber", "Dell"]
     
     var body: some View {
         ZStack {
             Color.background
                 .edgesIgnoringSafeArea(.all)
-            if(enterprise == false) {
+            if(isEnterprise == false) {
                 ScrollView {
                     HStack(spacing: 116){
                         Text("Ola, Fulane")
@@ -170,8 +170,7 @@ struct HomeView: View {
                 }
                 .scrollDisabled(true)
                 
-            }
-            else {
+            } else {
                 ScrollView {
                     HStack(spacing: 116){
                         Text("Ola, Fulane")
@@ -317,5 +316,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    HomeView(isEnterprise: true)
 }
