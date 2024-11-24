@@ -147,7 +147,7 @@ struct HomeView: View {
             } else {
                 ScrollView {
                     HStack(){
-                        Text("Ola, Fulane")
+                        Text("Olá, \(userAuth.name)")
                             .fontWeight(.bold)
                             .font(.system(size: 34))
                             .padding()
@@ -161,37 +161,30 @@ struct HomeView: View {
                                 VStack{
                                     Text("Você possui:")
                                         .foregroundStyle(.lightBrown)
-                                    VStack{
-                                        Text("100")
-                                            .font(.system(size: 28))
-                                            .foregroundColor(.white)
-                                        Text("cupons vendidos")
-                                            .font(.system(size: 13))
-                                            .foregroundColor(.white)
-                                        
-                                    }
-                                    .frame(width: 124, height: 55)
-                                    .background(.brown)
-                                    .cornerRadius(20)
+                                        .fontWeight(.bold)
                                 }
                                 .padding(.top)
                                 VStack{
-                                    Text("Créditos Acumulados")
-                                        .font(.system(size: 16))
-                                        .foregroundColor(.white)
-                                    Text("1000")
-                                        .font(.system(size: 34))
-                                        .foregroundColor(.white)
-                                    Text("créditos de carbono")
-                                        .font(.system(size: 16))
-                                        .foregroundColor(.white)
+                                    HStack{
+                                        Image(.coins)
+                                            .font(.system(size: 56))
+                                        VStack{
+                                            Text(String(format: "%.2f", userAuth.credit))
+                                                .font(.system(size: 28))
+                                                .foregroundColor(.white)
+                                            Text("créditos")
+                                                .font(.system(size: 14))
+                                                .foregroundColor(.white)
+                                        }
+                                    }
                                 }
-                                .frame(width: 193, height: 80)
-                                .background(.lightBrown)
+//                                .frame(width: 193, height: 80)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(.brown)
                                 .cornerRadius(20)
                                 .padding(.top)
                             }
-                            NavigationLink(destination: AddMaterial()) {
+                            NavigationLink(destination: VoucherRegisterView()) {
                                 HStack{
                                     Image(systemName: "dollarsign.circle.fill")
                                         .font(.system(size: 61))
@@ -226,59 +219,40 @@ struct HomeView: View {
                             .foregroundColor(.darkGreen)
                         Spacer()
                     }
-                    ScrollView(.horizontal){
-                        HStack{
-                            HStack{
-                                Circle()
-                                    .frame(height: 52)
-                                    .foregroundStyle(.darkGreen)
-                                VStack(alignment: .leading){
-                                    Text("10% de desconto")
-                                        .font(.system(size: 20))
-                                        .bold()
-                                        .foregroundColor(.darkGreen)
-                                    Text("em produtos Petrobras")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.darkGreen)
-                                    HStack{
-                                        Image(systemName: "dollarsign.circle.fill")
-                                            .font(.system(size: 15))
-                                        Text("Custo: 10 créditos")
-                                            .font(.system(size: 13))
+                    if !isLoading {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(vouchers) { voucher in
+                                    HStack {
+                                        Circle()
+                                            .frame(height: 52)
+                                            .foregroundStyle(.darkGreen)
+                                        VStack(alignment: .leading){
+                                            Text("\(voucher.title)")
+                                                .font(.system(size: 20))
+                                                .bold()
+                                                .foregroundColor(.darkGreen)
+                                            Text("\(voucher.description)")
+                                                .font(.system(size: 18))
+                                                .foregroundColor(.darkGreen)
+                                            HStack{
+                                                Image(systemName: "dollarsign.circle.fill")
+                                                    .font(.system(size: 15))
+                                                Text("Custo: \(String(format: "%.2f", voucher.purchased_credit))  créditos")
+                                                    .font(.system(size: 13))
+                                            }
+                                            .foregroundColor(.lightBrown)
+                                        }
                                     }
-                                    .foregroundColor(.lightBrown)
+                                    .padding(.trailing, 40)
+                                    .background(Image(.cupom))
+                                    .frame(width: 328, height: 106)
                                 }
-                            }.padding(.trailing, 40)
-                            .background(Image(.cupom))
-                            .frame(width: 328, height: 106)
-                            
-                            HStack{
-                                Circle()
-                                    .frame(height: 52)
-                                    .foregroundStyle(.darkGreen)
-                                VStack(alignment: .leading){
-                                    Text("10% de desconto")
-                                        .font(.system(size: 20))
-                                        .bold()
-                                        .foregroundColor(.darkGreen)
-                                    Text("em produtos Petrobras")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.darkGreen)
-                                    HStack{
-                                        Image(systemName: "dollarsign.circle.fill")
-                                            .font(.system(size: 15))
-                                        Text("Custo: 10 créditos")
-                                            .font(.system(size: 13))
-                                    }
-                                    .foregroundColor(.lightBrown)
-                                }
-                            }.padding(.trailing, 40)
-                            .background(Image(.cupom))
-                            .frame(width: 328, height: 106)
+                            }
                         }
+                        .frame(width: 350)
+                        .scrollClipDisabled()
                     }
-                    .frame(width: 350)
-                    .scrollClipDisabled()
                 }
                 .scrollDisabled(true)
             }
@@ -299,5 +273,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(userAuth: User(username: "p", name: "pedro", credit: 21, is_enterprise: false))
+    HomeView(userAuth: User(username: "p", name: "pedro", credit: 21, is_enterprise: true))
 }
