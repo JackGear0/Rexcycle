@@ -11,7 +11,7 @@ struct RedeemVoucherView: View {
     
     @Environment(\.dismiss) var dismiss
     @State var isPurchased = false
-    @State var voucherCode: UUID
+    @State var voucher: Voucher
     
     var body: some View {
         VStack {
@@ -27,6 +27,15 @@ struct RedeemVoucherView: View {
                         .cornerRadius(10)
                         .onTapGesture {
                             isPurchased = true
+                            Task {
+                                do {
+                                    let user = try await API.me()
+                                    try await API.updateCredits(credits: user.credit - voucher.purchased_credit)
+                                    print("Créditos atualizados com sucesso!")
+                                } catch {
+                                    print("Erro ao atualizar créditos: \(error)")
+                                }
+                            }
                         }
                     
                     Text("Não")
@@ -41,12 +50,12 @@ struct RedeemVoucherView: View {
                 }
             } else {
                 Text("Cupom:")
-                Text(voucherCode.uuidString)
+                Text(voucher.id.uuidString)
             }
         }
     }
 }
 
-#Preview {
-    RedeemVoucherView(voucherCode: UUID())
-}
+//#Preview {
+//    RedeemVoucherView(voucherCode: UUID())
+//}

@@ -140,7 +140,7 @@ struct HomeView: View {
                                         showingSheet = true
                                     }
                                     .sheet(isPresented: $showingSheet) {
-                                        RedeemVoucherView(voucherCode: voucher.id)
+                                        RedeemVoucherView(voucher: voucher)
                                     }
                                 }
                             }
