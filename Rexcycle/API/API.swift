@@ -112,6 +112,20 @@ enum API {
         UserDefaults.standard.set("", forKey: "token")
     }
     
+    static func me() async throws -> User {
+        let url = baseURL.appending("users/me")
+        let token = UserDefaults.standard.string(forKey: "token")!
+
+        var request = URLRequest(url: URL(string: url)!)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let (data, response) = try await URLSession.shared.data(for: request)
+        try check(data: data, response: response)
+        let user = try JSONDecoder().decode(User.self, from: data)
+        return user
+    }
+    
     static func getVouchers() async throws -> [Voucher] {
         let vouchersPath = baseURL.appending("posts")
         guard let vouchersURL = URL(string: vouchersPath) else {
