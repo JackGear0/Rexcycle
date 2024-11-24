@@ -17,7 +17,7 @@ struct ChatListView: View {
     @State var chats: [Chat] = [Chat(chatModel: ChatModel(messages: [], context: ""))]
     @State var selectedChat: Chat? = nil
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 List($chats) { $chat in
                     NavigationLink {
