@@ -35,7 +35,7 @@ struct RexcycleApp: App {
                                 }
                             }
                         }) {
-                            Text("Login como consumidor")
+                            Text("Login como transportadora")
                                 .font(.title)
                                 .foregroundStyle(.black)
                                 .padding()
