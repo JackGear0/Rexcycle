@@ -9,36 +9,21 @@ import Foundation
 import SwiftUI
 
 class MaterialViewModel: ObservableObject {
-    @Published var selectedObject: String = "Garrafa"
     @Published var selectedMaterial: String = ""
     @Published var selectedQuantity: Double = 0
     @Published var co2Emitted: String = "0"
     @Published var credits: Double = 0
     @Published var resultMessage: String = ""
 
-    let materialIDs: [String: [String: String]] = [
-        "Garrafa": [
-            "Vidro": "ba7fdbab-582b-41ab-9541-f9edde7f3341",
-            "Plástico": "aafd5e42-1125-4789-b3c0-10fd287d30df",
-            "Metal": "98436949-4dfb-41f9-a1da-76746bb0e5ea"
-        ],
-        "Embalagem": [
-            "Papelão": "5b9483e6-037c-4f2b-9de7-20c18f66461c",
-            "Plástico": "0bd13fed-71c9-4f1c-a655-f3c767f95415"
-        ],
-        "Sacola": [
-            "Plástico": "070909a1-d031-4cd4-8465-2406eb8fa273"
-        ],
-        "Latinha": [
-            "Metal": "98436949-4dfb-41f9-a1da-76746bb0e5ea"
-        ],
-        "Papel": [
-            "Papel": "afa65c77-c405-4216-8df8-027ed59edb8c"
-        ]
+    let materialIDs: [String: String] = [
+        "Vidro": "ba7fdbab-582b-41ab-9541-f9edde7f3341",
+        "Plástico": "aafd5e42-1125-4789-b3c0-10fd287d30df",
+        "Metal": "98436949-4dfb-41f9-a1da-76746bb0e5ea",
+        "Papel": "afa65c77-c405-4216-8df8-027ed59edb8c"
     ]
 
     func calculateCarbonFootprint() {
-        guard let materialID = materialIDs[selectedObject]?[selectedMaterial] else {
+        guard let materialID = materialIDs[selectedMaterial] else {
             DispatchQueue.main.async {
                 self.resultMessage = "Material não encontrado para o objeto selecionado."
             }
@@ -92,10 +77,11 @@ class MaterialViewModel: ObservableObject {
 //                    print(jsonObject)
                     if let co2e = jsonObject["co2e"] as? Double {
                         DispatchQueue.main.async {
-                            print(co2e)
                             self.co2Emitted = String(co2e * self.selectedQuantity)
-                            self.credits = self.convertToCredits(co2e * self.selectedQuantity)
+                            self.credits += self.convertToCredits(co2e * self.selectedQuantity)
+                            print(self.credits)
                             self.resultMessage = "CO2: \(self.co2Emitted) kg = \(self.credits) créditos"
+                            self.selectedQuantity = 0
                         }
                     } else {
                         DispatchQueue.main.async {

@@ -11,9 +11,9 @@ enum Material: String, Codable {
     case plastico, metal, vidro, papel
 }
 
-struct MaterialID {
-    let object: String
-    let material: String
-    let id: String
+struct MaterialID: Identifiable {
+    var material: String
+    var id = UUID()
+    var weight: Double
 }
 
