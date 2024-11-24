@@ -10,53 +10,49 @@ import SwiftUI
 
 struct Chat: Identifiable {
     let id = UUID()
-    let title: String
-    let date: String
+    var chatModel: ChatModel
 }
 
 struct ChatListView: View {
-    let chats: [Chat] = [
-        Chat(title: "Dúvidas sobre emissão de carbono", date: "23/09/2024 - 19:00"),
-        Chat(title: "Cálculo da emissão de carbono", date: "21/09/2024 - 19:00"),
-        Chat(title: "Dúvidas sobre emissão de carbono", date: "19/09/2024 - 19:00"),
-        Chat(title: "Energias sustentáveis", date: "17/09/2024 - 19:00")
-    ]
-    
+    @State var chats: [Chat] = [Chat(chatModel: ChatModel(messages: [], context: ""))]
+    @State var selectedChat: Chat? = nil
     var body: some View {
         NavigationStack {
             VStack {
-                HStack(spacing: 116){
-                    Text("Chat List")
-                        .fontWeight(.bold)
-                        .font(.system(size: 34))
-                        .padding()
-                        .foregroundColor(.black)
-                        .frame(alignment: .leading)
-                    Spacer()
-                }
-                List(chats) { chat in
-                    HStack {
-                        Image(systemName: "message.fill")
-                            .foregroundColor(.green)
-                        VStack(alignment: .leading) {
-                            Text(chat.title)
-                                .font(.headline)
-                            Text(chat.date)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
+                List($chats) { $chat in
+                    NavigationLink {
+                        GeminiChatView(chatModel: $chat.chatModel)
+                    } label: {
+                        HStack {
+                            Image(systemName: "message.fill")
+                                .foregroundColor(.green)
+                            VStack(alignment: .leading) {
+                                Text(chat.chatModel.context)
+                                    .font(.headline)
+                                Text("")
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                            }
                         }
+                        .padding(.vertical, 8)
                     }
-                    .padding(.vertical, 8)
-                }
-                .listStyle(PlainListStyle())
+                    
+                        
+                    }
                 .navigationTitle("Chat List")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
+                        NavigationLink {
+                            
                             // Ação ao clicar no botão de adicionar
-                        }) {
-                            Image(systemName: "plus.bubble")
-                                .foregroundStyle(.black)
+                        } label: {
+                            Button {
+                                let newChat = Chat(chatModel: ChatModel(messages: [], context: ""))
+                                chats.append(newChat)
+                            } label: {
+                                Image(systemName: "plus.bubble")
+                                    .foregroundStyle(.black)
+                            }
                         }
                     }
                 }
@@ -64,6 +60,12 @@ struct ChatListView: View {
             .background(.babyGreen)
         }
     }
+}
+
+func formatDate(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "dd/MM/yyyy - HH:mm" // Specify the desired format
+    return formatter.string(from: date)
 }
 
 #Preview {

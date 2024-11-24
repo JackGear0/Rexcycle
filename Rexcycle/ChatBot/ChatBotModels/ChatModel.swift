@@ -8,7 +8,7 @@ import Foundation
 
 struct ChatModel: Hashable, Codable {
     var messages: [ChatMessage]
-    let context: String
+    var context: String
 }
 
 struct ChatMessage: Hashable, Codable {

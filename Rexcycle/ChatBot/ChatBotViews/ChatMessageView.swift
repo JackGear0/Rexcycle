@@ -48,7 +48,7 @@ struct ChatMessageView: View {
                     HStack {
                         HStack {
                             Text("\(message.text)")
-                                .multilineTextAlignment(.trailing)
+                                .multilineTextAlignment(!isFromUser ? .leading : .trailing)
                                 .lineLimit(nil)
                                 .font(.headline)
                                 .foregroundColor(colorText)

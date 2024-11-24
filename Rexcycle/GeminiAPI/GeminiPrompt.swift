@@ -45,6 +45,7 @@ Empresas podem criar Cupons, que são como "Missões"
 Usuários podem pegar esses cupons e fazer as missões, vendendo o seu crédito para a empresa e ganhando descontos ou vouchers na empresa para isso
 
 Você está em um chat, não prolongue suas mensagens mais do que o necessário, tente se manter a respostas curtas
+Depois disso bote uma barra vertical "|" e após a barra, sem espaço entre a barra e as palavras, dê uma frase bastante curta (maximo de 7 palavras) que descreva o assunto
 Responda a pergunta: 
 {
 \(prompt)
@@ -52,11 +53,6 @@ Responda a pergunta:
 O contexto da sua conversa é (Em formato JSon):
 {
 \(jsonPrompt)
-}
-Baseado nessas, responda a pergunta feita anteriormente: 
-{
-\(prompt)
-}
 """
         print(contexto)
         let response = try await model.generateContent("\(contexto)")

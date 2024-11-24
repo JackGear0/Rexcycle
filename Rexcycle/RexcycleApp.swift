@@ -72,7 +72,6 @@ struct RexcycleApp: App {
                             }
                         
                         ChatListView()
-                        //GeminiChatView()
                             .tabItem {
                                 Image(systemName: "message.fill")
                                 Text("Chat")
