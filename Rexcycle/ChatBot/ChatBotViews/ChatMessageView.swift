@@ -37,7 +37,7 @@ struct ChatMessageView: View {
                         .frame(width: 60, height: 60)
                         
                         VStack(alignment: .leading) {
-                            Text("Rexcycle")
+                            Text("\(isFromUser ? "You" : "Rexcycle")")
                                 .font(.headline)
                             Text("\(message.timestamp.formatted( date: .omitted, time: .shortened))")
                         }
