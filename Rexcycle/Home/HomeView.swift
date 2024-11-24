@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    var enterprise: Bool = true
+    var enterprise: Bool = false
     var empresa = ["Amazon", "Guaraná", "Coca-cola", "Uber", "Dell"]
     
     var body: some View {
@@ -117,8 +117,52 @@ struct HomeView: View {
                     }
                     ScrollView(.horizontal){
                         HStack{
-                            Image(.cupom)
-                            Image(.cupom)
+                            HStack{
+                                Circle()
+                                    .frame(height: 52)
+                                    .foregroundStyle(.darkGreen)
+                                VStack(alignment: .leading){
+                                    Text("10% de desconto")
+                                        .font(.system(size: 20))
+                                        .bold()
+                                        .foregroundColor(.darkGreen)
+                                    Text("em produtos Petrobras")
+                                        .font(.system(size: 18))
+                                        .foregroundColor(.darkGreen)
+                                    HStack{
+                                        Image(systemName: "dollarsign.circle.fill")
+                                            .font(.system(size: 15))
+                                        Text("Custo: 10 créditos")
+                                            .font(.system(size: 13))
+                                    }
+                                    .foregroundColor(.lightBrown)
+                                }
+                            }.padding(.trailing, 40)
+                            .background(Image(.cupom))
+                            .frame(width: 328, height: 106)
+                            HStack{
+                                Circle()
+                                    .frame(height: 52)
+                                    .foregroundStyle(.darkGreen)
+                                VStack(alignment: .leading){
+                                    Text("10% de desconto")
+                                        .font(.system(size: 20))
+                                        .bold()
+                                        .foregroundColor(.darkGreen)
+                                    Text("em produtos Petrobras")
+                                        .font(.system(size: 18))
+                                        .foregroundColor(.darkGreen)
+                                    HStack{
+                                        Image(systemName: "dollarsign.circle.fill")
+                                            .font(.system(size: 15))
+                                        Text("Custo: 10 créditos")
+                                            .font(.system(size: 13))
+                                    }
+                                    .foregroundColor(.lightBrown)
+                                }
+                            }.padding(.trailing, 40)
+                            .background(Image(.cupom))
+                            .frame(width: 328, height: 106)
                         }
                     }
                     .frame(width: 350)
