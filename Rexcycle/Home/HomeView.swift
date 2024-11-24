@@ -9,25 +9,25 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State var isEnterprise: Bool
+    @State var userAuth: User
+    @State var isLoading: Bool = true
+    @State var vouchers: [Voucher] = []
     var empresa = ["Amazon", "Guaraná", "Coca-cola", "Uber", "Dell"]
     
     var body: some View {
         ZStack {
             Color.background
                 .edgesIgnoringSafeArea(.all)
-            if(isEnterprise == false) {
+            if !userAuth.is_enterprise {
                 ScrollView {
-                    HStack(spacing: 116){
-                        Text("Ola, Fulane")
+                    HStack(){
+                        Text("Olá, \(userAuth.name)")
                             .fontWeight(.bold)
                             .font(.system(size: 34))
                             .padding()
                             .foregroundColor(.darkGreen)
                             .frame(alignment: .leading)
-                        Image(systemName: "person.circle.fill")
-                            .font(.system(size: 40))
-                            .foregroundColor(.darkGreen)
+                        Spacer()
                     }
                     ZStack{
                         VStack{
@@ -35,11 +35,15 @@ struct HomeView: View {
                                 VStack{
                                     Text("Você possui:")
                                         .foregroundStyle(.lightBrown)
+                                        .fontWeight(.bold)
+                                }
+                                .padding(.top)
+                                VStack{
                                     HStack{
                                         Image(.coins)
                                             .font(.system(size: 56))
                                         VStack{
-                                            Text("100")
+                                            Text(String(format: "%.2f", userAuth.credit))
                                                 .font(.system(size: 28))
                                                 .foregroundColor(.white)
                                             Text("créditos")
@@ -47,24 +51,10 @@ struct HomeView: View {
                                                 .foregroundColor(.white)
                                         }
                                     }
-                                    .frame(width: 124, height: 55)
-                                    .background(.brown)
-                                    .cornerRadius(20)
                                 }
-                                .padding(.top)
-                                VStack{
-                                    Text("Créditos Acumulados")
-                                        .font(.system(size: 16))
-                                        .foregroundColor(.white)
-                                    Text("1000")
-                                        .font(.system(size: 34))
-                                        .foregroundColor(.white)
-                                    Text("créditos")
-                                        .font(.system(size: 16))
-                                        .foregroundColor(.white)
-                                }
-                                .frame(width: 193, height: 80)
-                                .background(.lightBrown)
+//                                .frame(width: 193, height: 80)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(.brown)
                                 .cornerRadius(20)
                                 .padding(.top)
                             }
@@ -90,6 +80,8 @@ struct HomeView: View {
                                 .padding(.bottom)
                             }
                         }
+                        .padding(.vertical, 0)
+                        .padding(.horizontal, 16)
                     }
                     .frame(width: 353, height: 213)
                     .background(.white)
@@ -115,73 +107,53 @@ struct HomeView: View {
                             }
                         }
                     }
-                    ScrollView(.horizontal){
-                        HStack{
-                            HStack{
-                                Circle()
-                                    .frame(height: 52)
-                                    .foregroundStyle(.darkGreen)
-                                VStack(alignment: .leading){
-                                    Text("10% de desconto")
-                                        .font(.system(size: 20))
-                                        .bold()
-                                        .foregroundColor(.darkGreen)
-                                    Text("em produtos Petrobras")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.darkGreen)
-                                    HStack{
-                                        Image(systemName: "dollarsign.circle.fill")
-                                            .font(.system(size: 15))
-                                        Text("Custo: 10 créditos")
-                                            .font(.system(size: 13))
+                    if !isLoading {
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(vouchers) { voucher in
+                                    HStack {
+                                        Circle()
+                                            .frame(height: 52)
+                                            .foregroundStyle(.darkGreen)
+                                        VStack(alignment: .leading){
+                                            Text("\(voucher.title)")
+                                                .font(.system(size: 20))
+                                                .bold()
+                                                .foregroundColor(.darkGreen)
+                                            Text("\(voucher.description)")
+                                                .font(.system(size: 18))
+                                                .foregroundColor(.darkGreen)
+                                            HStack{
+                                                Image(systemName: "dollarsign.circle.fill")
+                                                    .font(.system(size: 15))
+                                                Text("Custo: \(String(format: "%.2f", voucher.purchased_credit))  créditos")
+                                                    .font(.system(size: 13))
+                                            }
+                                            .foregroundColor(.lightBrown)
+                                        }
                                     }
-                                    .foregroundColor(.lightBrown)
+                                    .padding(.trailing, 40)
+                                    .background(Image(.cupom))
+                                    .frame(width: 328, height: 106)
                                 }
-                            }.padding(.trailing, 40)
-                            .background(Image(.cupom))
-                            .frame(width: 328, height: 106)
-                            HStack{
-                                Circle()
-                                    .frame(height: 52)
-                                    .foregroundStyle(.darkGreen)
-                                VStack(alignment: .leading){
-                                    Text("10% de desconto")
-                                        .font(.system(size: 20))
-                                        .bold()
-                                        .foregroundColor(.darkGreen)
-                                    Text("em produtos Petrobras")
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.darkGreen)
-                                    HStack{
-                                        Image(systemName: "dollarsign.circle.fill")
-                                            .font(.system(size: 15))
-                                        Text("Custo: 10 créditos")
-                                            .font(.system(size: 13))
-                                    }
-                                    .foregroundColor(.lightBrown)
-                                }
-                            }.padding(.trailing, 40)
-                            .background(Image(.cupom))
-                            .frame(width: 328, height: 106)
+                            }
                         }
+                        .frame(width: 350)
+                        .scrollClipDisabled()
                     }
-                    .frame(width: 350)
-                    .scrollClipDisabled()
                 }
                 .scrollDisabled(true)
                 
             } else {
                 ScrollView {
-                    HStack(spacing: 116){
+                    HStack(){
                         Text("Ola, Fulane")
                             .fontWeight(.bold)
                             .font(.system(size: 34))
                             .padding()
                             .foregroundColor(.darkGreen)
                             .frame(alignment: .leading)
-                        Image(systemName: "person.circle.fill")
-                            .font(.system(size: 40))
-                            .foregroundColor(.darkGreen)
+                        Spacer()
                     }
                     ZStack{
                         VStack{
@@ -312,9 +284,20 @@ struct HomeView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            Task {
+                do {
+                    vouchers = try await API.getVouchers()
+                    isLoading = false
+                    print("Login realizado com sucesso!")
+                } catch {
+                    print("Erro ao fazer login: \(error)")
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    HomeView(isEnterprise: true)
+    HomeView(userAuth: User(username: "p", name: "pedro", credit: 21, is_enterprise: false))
 }
