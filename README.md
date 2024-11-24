@@ -1,9 +1,5 @@
-# Rexcycle 🌱  
-**O Quarto R da Sustentabilidade ♻️**  
+# Rexcycle: O Quarto R da Sustentabilidade ♻️
 
----
-
-## 📱 **O que é o Rexcycle?**  
 Rexcycle é um aplicativo iOS que conecta **transportadoras** e **empresas** para fomentar a **redução de emissões de CO2** e promover o uso de **energias renováveis** no setor logístico.  
 
 ---
@@ -25,8 +21,30 @@ Rexcycle é um aplicativo iOS que conecta **transportadoras** e **empresas** par
 
 ## 🔧 **Tecnologias principais**  
 - **APIs:**  
-  - [Climatiq](https://www.climatiq.io/) – Calcula economia de CO2 baseada em atividades sustentáveis.  
-  - [API própria](https://github.com/Pedro-Cat/rexcycleAPI/tree/main) – Gerencia usuários (transportadoras e empresas) e transações de créditos de carbono.  
+  - [Climatiq](https://www.climatiq.io/) – Calcula economia de CO2 baseada em atividades sustentáveis.
+    
+    <table>
+      <tr>
+        <th>Material</th>
+        <th>Fatores de Emissão</th>
+      <tr>
+        <td>Plástico</td>
+        <td>0,6125kg de CO₂ equivalente</td>
+      </tr>
+      <tr>
+        <td>Vidro</td>
+        <td>0,3762 kg de CO₂ equivalente</td>
+      </tr>
+      <tr>
+        <td>Papel</td>
+        <td>0,5422kg de CO₂ equivalente</td>
+      </tr>
+      <tr>
+        <td>Metal</td>
+        <td>0,4322kg de CO₂ equivalente</td>
+      </tr>
+    </table>
+  - [API própria](https://github.com/Pedro-Cat/rexcycleAPI/tree/main) – Gerencia usuários (transportadoras e empresas) e transações de créditos de carbono.
 
 - **Chatbot com uso de [IA Generativa](https://github.com/google-gemini/generative-ai-swift):** Assistente virtual para tirar dúvidas sobre sustentabilidade e práticas ecológicas.  
 
@@ -48,11 +66,11 @@ Rexcycle é um aplicativo iOS que conecta **transportadoras** e **empresas** par
 ---
 
 ## 👥 **Equipe:** 
-- **Felipe Leo Cavalcante**  
-- **Layza Maria Rodrigues Carneiro**  
-- **Maria Clara Alexandre de Oliveira**  
-- **Pedro Henrique Catunda Rocha**  
-- **Yago Souza Ramos**  
+- **[Felipe Leo Cavalcante](https://github.com/JackGear0)**  
+- **[Layza Maria Rodrigues Carneiro](https://github.com/LayzaCarneiro)**  
+- **[Maria Clara Alexandre de Oliveira](https://github.com/claraolvrx)**  
+- **[Pedro Henrique Catunda Rocha](https://github.com/Pedro-Cat)**  
+- **[Yago Souza Ramos](https://github.com/Nhagss)**  
 
 ---
 
