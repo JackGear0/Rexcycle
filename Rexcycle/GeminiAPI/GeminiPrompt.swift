@@ -33,9 +33,25 @@ func generateChatResponse(prompt: String, history: ChatModel) async -> String {
         let model = GenerativeModel(name: "gemini-1.5-flash-latest", apiKey: apiKey)
         print(prompt)
         let jsonData = try JSONEncoder().encode(history)
-        let historyString = String(data: jsonData, encoding: .utf8)!
-        print(historyString)
-        let contexto = "Você está em um chat, não prolongue suas mensagens, o contexto da sua conversa é: \n \(historyString) \n. Baseado nessas, responda a essa pergunta: \(prompt)"
+        let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
+        let prettyJsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+        let jsonPrompt = String(data: prettyJsonData, encoding: .utf8)!
+        let contexto = """
+Você está em um chat, não prolongue suas mensagens mais do que o necessário
+Responda a pergunta: 
+{
+\(prompt)
+}
+O contexto da sua conversa é (Em formato JSon):
+{
+\(jsonPrompt)
+}
+Baseado nessas, responda a pergunta feita anteriormente: 
+{
+\(prompt)
+}
+"""
+        print(contexto  )
         let response = try await model.generateContent("\(contexto)")
         if let text = response.text {
             return text

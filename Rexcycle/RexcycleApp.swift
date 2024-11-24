@@ -11,7 +11,8 @@ import SwiftUI
 struct RexcycleApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            GeminiChatView()
         }
     }
 }
+ 
