@@ -13,6 +13,9 @@ struct AddMaterial: View {
     @State var items: [MaterialID] = []
     @State var totalWeight: Int = 0
     
+    @State private var showConfirmationPopup = false
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             ZStack {
@@ -201,6 +204,7 @@ struct AddMaterial: View {
                         Task {
                             do {
                                 try await API.updateCredits(credits: viewModel.credits)
+                                showConfirmationPopup = true
                                 print("Créditos atualizados com sucesso!")
                             } catch {
                                 print("Erro ao atualizar créditos: \(error)")
@@ -232,6 +236,11 @@ struct AddMaterial: View {
                 .padding()
             }
             .navigationTitle("Cadastrar Coleta")
+        }
+        .alert("Créditos resgatados com sucesso!", isPresented: $showConfirmationPopup) {
+            Button("OK") {
+                dismiss()
+            }
         }
     }
     
