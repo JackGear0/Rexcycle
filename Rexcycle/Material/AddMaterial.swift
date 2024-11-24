@@ -158,7 +158,7 @@ struct AddMaterial: View {
                         .fontWeight(.semibold)
                         .foregroundStyle(.darkGreen)
                         .padding(.horizontal, 144)
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 5)
                     
                     VStack(alignment: .leading, spacing: 8) {
                        
@@ -198,7 +198,14 @@ struct AddMaterial: View {
                     .fontWeight(.semibold)
                     
                     Button {
-                        
+                        Task {
+                            do {
+                                try await API.updateCredits(credits: viewModel.credits)
+                                print("Créditos atualizados com sucesso!")
+                            } catch {
+                                print("Erro ao atualizar créditos: \(error)")
+                            }
+                        }
                     } label: {
                         ZStack {
                             Rectangle()
@@ -215,11 +222,11 @@ struct AddMaterial: View {
                                     .font(.body)
                                     .fontWeight(.bold)
                             }
-                            
                         }
                     }
                     .padding(.top, 20)
                     .padding(.horizontal, 70)
+
                     
                 }
                 .padding()
