@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+    @Environment(\.dismiss) var dismiss
     @State var userAuth: User
     @State var isLoading: Bool = true
     @State var vouchers: [Voucher] = []
     var empresa = ["Amazon", "Guaraná", "Coca-cola", "Uber", "Dell"]
+    @State private var showingSheet = false
     
     var body: some View {
         ZStack {
@@ -52,7 +53,7 @@ struct HomeView: View {
                                         }
                                     }
                                 }
-//                                .frame(width: 193, height: 80)
+                                //                                .frame(width: 193, height: 80)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .background(.brown)
                                 .cornerRadius(20)
@@ -135,6 +136,12 @@ struct HomeView: View {
                                     .padding(.trailing, 40)
                                     .background(Image(.cupom))
                                     .frame(width: 328, height: 106)
+                                    .onTapGesture {
+                                        showingSheet = true
+                                    }
+                                    .sheet(isPresented: $showingSheet) {
+                                        RedeemVoucherView(voucherCode: voucher.id)
+                                    }
                                 }
                             }
                         }
@@ -178,7 +185,7 @@ struct HomeView: View {
                                         }
                                     }
                                 }
-//                                .frame(width: 193, height: 80)
+                                //                                .frame(width: 193, height: 80)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .background(.brown)
                                 .cornerRadius(20)
@@ -273,5 +280,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(userAuth: User(username: "p", name: "pedro", credit: 21, is_enterprise: true))
+    HomeView(userAuth: User(username: "p", name: "pedro", credit: 21, is_enterprise: false))
 }
