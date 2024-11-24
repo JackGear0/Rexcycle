@@ -43,7 +43,7 @@ enum API {
         let userPath = baseURL.appending("users/\(userID.uuidString)")
         let userURL = URL(string: userPath)!
         do {
-            let (data, response) = try await URLSession.shared.data(from: userURL)
+            let (data, _) = try await URLSession.shared.data(from: userURL)
             return try JSONDecoder().decode(User.self, from: data)
         } catch { throw APIRequestError.requestError }
     }
@@ -71,6 +71,27 @@ enum API {
         try check(data: data, response: response)
     }
     
+    static func updateCredits(credits: Double) async throws {
+        let url = baseURL.appending("users/credits")
+        guard let token = UserDefaults.standard.string(forKey: "token") else {
+            throw NSError(domain: "Token não encontrado", code: -1, userInfo: nil)
+        }
+
+        var request = URLRequest(url: URL(string: url)!)
+        request.httpMethod = "PATCH"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body = ["credit": credits]
+        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        try check(data: data, response: response)
+
+        print("Créditos atualizados com sucesso!")
+    }
+
     /// Faz login do usuário e retorna seu token de acesso caso login aceito
     static func login(username: String, password: String) async throws {
         let url = baseURL.appending("users/login")
