@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B359075E2CF31E8500B3DF52 /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = B359075D2CF31E8500B3DF52 /* GoogleGenerativeAI */; };
+		F7E1F5132CF2E51900CE1A2E /* GoogleGenerativeAI in Frameworks */ = {isa = PBXBuildFile; productRef = F7E1F5122CF2E51900CE1A2E /* GoogleGenerativeAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B359075E2CF31E8500B3DF52 /* GoogleGenerativeAI in Frameworks */,
+				F7E1F5132CF2E51900CE1A2E /* GoogleGenerativeAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,14 +64,13 @@
 			buildRules = (
 			);
 			dependencies = (
-				CE94A7EB2CF3226C009F380E /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				B35906F02CF2492700B3DF52 /* Rexcycle */,
 			);
 			name = Rexcycle;
 			packageProductDependencies = (
-				B359075D2CF31E8500B3DF52 /* GoogleGenerativeAI */,
+				F7E1F5122CF2E51900CE1A2E /* GoogleGenerativeAI */,
 			);
 			productName = Rexcycle;
 			productReference = B35906EE2CF2492700B3DF52 /* Rexcycle.app */;
@@ -102,7 +101,7 @@
 			mainGroup = B35906E52CF2492700B3DF52;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				B359075C2CF31E8500B3DF52 /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
+				F7E1F5112CF2E51900CE1A2E /* XCRemoteSwiftPackageReference "generative-ai-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B35906EF2CF2492700B3DF52 /* Products */;
@@ -133,13 +132,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		CE94A7EB2CF3226C009F380E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = CE94A7EA2CF3226C009F380E /* GoogleGenerativeAI */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B35906FB2CF2492900B3DF52 /* Debug */ = {
@@ -265,7 +257,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Rexcycle/Preview Content\"";
-				DEVELOPMENT_TEAM = 7G7N4232U8;
+				DEVELOPMENT_TEAM = BCW73GZ93R;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -305,7 +297,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Rexcycle/Preview Content\"";
-				DEVELOPMENT_TEAM = 7G7N4232U8;
+				DEVELOPMENT_TEAM = BCW73GZ93R;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -360,9 +352,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B359075C2CF31E8500B3DF52 /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
+		F7E1F5112CF2E51900CE1A2E /* XCRemoteSwiftPackageReference "generative-ai-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google-gemini/generative-ai-swift";
+			repositoryURL = "https://github.com/google-gemini/generative-ai-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.5.6;
@@ -371,14 +363,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B359075D2CF31E8500B3DF52 /* GoogleGenerativeAI */ = {
+		F7E1F5122CF2E51900CE1A2E /* GoogleGenerativeAI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B359075C2CF31E8500B3DF52 /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
-			productName = GoogleGenerativeAI;
-		};
-		CE94A7EA2CF3226C009F380E /* GoogleGenerativeAI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B359075C2CF31E8500B3DF52 /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
+			package = F7E1F5112CF2E51900CE1A2E /* XCRemoteSwiftPackageReference "generative-ai-swift" */;
 			productName = GoogleGenerativeAI;
 		};
 /* End XCSwiftPackageProductDependency section */
