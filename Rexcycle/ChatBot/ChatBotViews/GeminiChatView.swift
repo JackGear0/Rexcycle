@@ -48,7 +48,7 @@ struct GeminiChatView: View {
                                         if response.last == "\n" {
                                             response.removeLast()
                                         }
-                                        
+                                        currentMessage = ""
                                         let textAndContext = response.components(separatedBy: "|")
                                         
                                         chatModel.context = textAndContext.last ?? ""
