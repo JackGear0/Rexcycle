@@ -109,7 +109,7 @@ enum API {
         
         let session = try JSONDecoder().decode(Session.self, from: data)
         
-        UserDefaults.standard.set(session.token, forKey: "token")
+        UserDefaults.standard.set("", forKey: "token")
     }
     
     static func getVouchers() async throws -> [Voucher] {
