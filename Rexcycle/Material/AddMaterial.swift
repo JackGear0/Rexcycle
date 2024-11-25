@@ -203,7 +203,8 @@ struct AddMaterial: View {
                     Button {
                         Task {
                             do {
-                                try await API.updateCredits(credits: viewModel.credits)
+                                let user = try await API.me()
+                                try await API.updateCredits(credits: viewModel.credits + user.credit)
                                 showConfirmationPopup = true
                                 print("Créditos atualizados com sucesso!")
                             } catch {
