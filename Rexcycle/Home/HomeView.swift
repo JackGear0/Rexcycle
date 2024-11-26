@@ -59,7 +59,7 @@ struct HomeView: View {
                                 .cornerRadius(20)
                                 .padding(.top)
                             }
-                            NavigationLink(destination: AddMaterial()) {
+                            NavigationLink(destination: AddMaterial(userAuth: $userAuth)) {
                                 HStack{
                                     Image(systemName: "trash.circle.fill")
                                         .font(.system(size: 61))

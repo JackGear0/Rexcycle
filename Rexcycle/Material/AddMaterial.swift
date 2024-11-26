@@ -12,6 +12,7 @@ struct AddMaterial: View {
     @State private var selectedUnit: String = "kg"
     @State var items: [MaterialID] = []
     @State var totalWeight: Int = 0
+    @Binding var userAuth: User
     
     @State private var showConfirmationPopup = false
     @Environment(\.dismiss) private var dismiss
@@ -203,8 +204,8 @@ struct AddMaterial: View {
                     Button {
                         Task {
                             do {
-                                let user = try await API.me()
-                                try await API.updateCredits(credits: viewModel.credits + user.credit)
+                                try await API.updateCredits(credits: viewModel.credits + userAuth.credit)
+                                userAuth.credit += viewModel.credits
                                 showConfirmationPopup = true
                                 print("Créditos atualizados com sucesso!")
                             } catch {
@@ -271,6 +272,6 @@ struct AddMaterial: View {
 }
 
 
-#Preview {
-    AddMaterial()
-}
+//#Preview {
+//    AddMaterial()
+//}
