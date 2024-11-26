@@ -10,7 +10,8 @@ import UIKit
 import Compression
 
 // Endereço local do host da API
-private let baseURL = "http://192.168.1.37:8080/"
+//private let baseURL = "http://192.168.1.37:8080/"
+private let baseURL = "http://Gibson-Antonieto.local:8080/"
 
 /// Retorna erros específicos
 enum APIRequestError: Error {
