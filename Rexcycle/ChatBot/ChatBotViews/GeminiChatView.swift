@@ -75,7 +75,8 @@ struct GeminiChatView: View {
                 }
                 .disabled(isLoading)
                 
-            }.padding(.horizontal)
+            }
+            .padding(.horizontal)
         }
     }
 }

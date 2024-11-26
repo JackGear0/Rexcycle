@@ -50,7 +50,6 @@ struct ChatMessageView: View {
                             Text("\(message.text)")
                                 .multilineTextAlignment(!isFromUser ? .leading : .trailing)
                                 .lineLimit(nil)
-                                .font(.headline)
                                 .foregroundColor(colorText)
                         }
                         .padding(EdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 20))

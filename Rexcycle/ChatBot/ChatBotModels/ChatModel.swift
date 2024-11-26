@@ -7,7 +7,7 @@
 import Foundation
 
 struct ChatModel: Hashable, Codable {
-    var messages: [ChatMessage]
+    var messages: [ChatMessage] = [ChatMessage(text: "oi", sender: "Gemini", timestamp: .now)]
     var context: String
 }
 
