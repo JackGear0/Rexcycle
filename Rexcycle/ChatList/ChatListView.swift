@@ -19,7 +19,7 @@ Olá, eu sou o Rexy, seu assistente de redução de gasto de carbono inteligente
 var chatPreview: ChatMessage = ChatMessage(text: chatStartString, sender: "Gemini", timestamp: .now)
 
 struct ChatListView: View {
-    @State var chats: [Chat] = [Chat(chatModel: ChatModel(messages: [chatPreview], context: "Pergunte Ao Rexinho"))]
+    @State var chats: [Chat] = [Chat(chatModel: ChatModel(messages: [chatPreview], context: "Pergunte Ao Rexy"))]
     @State var selectedChat: Chat? = nil
     var body: some View {
         NavigationStack {
